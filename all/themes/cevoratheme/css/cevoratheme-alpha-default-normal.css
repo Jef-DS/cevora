@@ -1,11 +1,6 @@
 /* This file will hold styles that are loaded using the same media query as the normal grid. */
 /* If you are using the default media queries provided by Omega, these styles will also
  *  apply to the widescreen layout unless they are overridden by the widescreen styles. */
- #block-system-main-menu {
-    font-family: Arial,Helvetica,sans-serif;
-    height: 35px;
-    text-transform: uppercase;
- }
  
  ul.menu li {
     list-style: none outside none;
@@ -29,12 +24,17 @@
     padding-right: 30px;
     text-decoration: none;;
  }
+#block-menu-block-2 {
+    font-family: Arial,Helvetica,sans-serif;
+    height: 35px;
+    text-transform: uppercase;
+ }
  
- 
-#block-system-main-menu li a:hover, #block-menu-menu-minimenu li a:hover {
+#block-menu-block-2 li a:hover, #block-menu-block-2 li a:hover {
 	color: #FF6600;
 }
-li a.active, li a.active-trail {
+
+#block-menu-block-2 li a.active,#block-menu-block-2 li a.active-trail {
     color: #FF6600;
     text-decoration: none;
     font-size: 14px;
@@ -44,7 +44,7 @@ li a.active, li a.active-trail {
 
  }
 
-#block-system-main-menu a:link,#block-system-main-menu a:visited {
+#block-menu-block-2 a{ /*:link,#block-menu-block-2 a:visited {*/
     color: #333333;
     text-decoration: none;
     font-size: 14px;
@@ -52,6 +52,8 @@ li a.active, li a.active-trail {
     letter-spacing: -1px;
     padding-right: 30px;
  }
+
+
  
  #zone-branding {
     height: 26px;
@@ -63,3 +65,57 @@ li a.active, li a.active-trail {
     height: 26px;
     width: 100%;
 }
+
+#region-sub-menu #block-menu-block-1 {
+	background: url('../images/slide_10.jpg') no-repeat;
+	height:328px;
+}
+
+.menu-block-1 > ul.menu {
+	background: url("../images/menu_interne_bg.png") repeat scroll 0 0 transparent;
+    height: 328px;
+    margin: 1px 0 0 1px;
+    padding-top: 10px;
+    position: relative;
+    width: 299px;
+}
+.menu-block-1 > ul.menu > li {
+	border-top-width: 1px;
+	border-top-color: #333333;
+	border-top-style: solid;
+}
+
+#block-menu-block-1 li {
+	    /*background: url("../images/arrow-right.png") no-repeat scroll right center transparent;*/
+    color: #333333;
+    display: block;
+    font-size: 14px;
+    /*height: 29px;*/
+    padding-top: 6px;
+    width: 275px;
+    list-style: none outside none;
+}
+
+#block-menu-block-1 a {
+    color: #333333;
+    text-decoration: none;
+    letter-spacing: -1px;
+    padding-right: 30px;
+}
+
+#block-menu-block-1 li a.active,#block-menu-block-1 li a.active-trail {
+    color: #FF6600;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: -1px;
+    padding-right: 30px;
+
+ }
+ 
+ #page-title {
+     color: #FF6600;
+    display: block;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 28px;
+ }
