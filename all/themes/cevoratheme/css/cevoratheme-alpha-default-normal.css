@@ -2,7 +2,7 @@
 /* If you are using the default media queries provided by Omega, these styles will also
  *  apply to the widescreen layout unless they are overridden by the widescreen styles. */
  
- ul.menu li {
+.region-menu ul.menu li {
     list-style: none outside none;
     display: inline;
  }
@@ -73,6 +73,7 @@
 
 .menu-block-1 > ul.menu {
 	background: url("../images/menu_interne_bg.png") repeat scroll 0 0 transparent;
+
     height: 328px;
     margin: 1px 0 0 1px;
     padding-top: 10px;
@@ -85,7 +86,7 @@
 	border-top-style: solid;
 }
 
-#block-menu-block-1 li {
+#block-menu-block-1 li, .menu-block-1 li {
 	    /*background: url("../images/arrow-right.png") no-repeat scroll right center transparent;*/
     color: #333333;
     display: block;
@@ -96,7 +97,7 @@
     list-style: none outside none;
 }
 
-#block-menu-block-1 a {
+#block-menu-block-1 a, .menu-block-1 li a {
     color: #333333;
     text-decoration: none;
     letter-spacing: -1px;
@@ -119,3 +120,42 @@
     font-weight: normal;
     line-height: 28px;
  }
+ 
+ ul li.collapsed {
+    background: url('../images/arrow-right.png') no-repeat scroll right center transparent;
+ }
+
+ ul li.expanded > a {
+    display: block;
+    width: auto;
+    background: url('../images/arrow-down_hover.png') no-repeat right;
+ }
+ 
+ article ul li.active {
+    /*background-image: url('../images/arrow_submenu.png');
+    background-repeat: no-repeat;
+    padding-left: 20px;*/
+    height: 22px;
+    width: 250px;
+ }
+ 
+ article ul li.active a {
+    display: block;
+    width: 247px;
+    height: 22px;
+    font-size: 12px;
+    color: #F60;
+    background: none;
+    padding: 0px;
+}
+
+article ul li a {
+display: block;
+width: 247px;
+height: 22px;
+font-size: 12px;
+color: #333;
+padding: 0px;
+background: none;
+     
+}

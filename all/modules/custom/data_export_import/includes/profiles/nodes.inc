@@ -643,6 +643,17 @@ function data_export_import_import_nodes($file) {
 
   return TRUE;
 }
+function file_directory_path($scheme = NULL) {
+  if (empty($scheme)) {
+    $scheme = variable_get('file_default_scheme', 'public');
+  }
+  if ($wrapper = file_stream_wrapper_get_instance_by_scheme($scheme)) {
+    return $wrapper->getDirectoryPath();
+  }
+  else {
+    return FALSE;
+  }
+}
 
 /**
  * Batch function to process lines from a dataset.
