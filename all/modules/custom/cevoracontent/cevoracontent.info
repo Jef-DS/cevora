@@ -1,0 +1,5 @@
+name= Cevora Content generator
+description= Genereert pagina's voor de Cevora testwebsite
+core= 7.x
+package= Beta modules
+dependencies[]= text

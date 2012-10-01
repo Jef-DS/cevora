@@ -1,0 +1,333 @@
+<?php
+
+/**
+ * @File
+ * Installatie bestand voor Cevora Content module
+ */
+
+/**
+ * Implementatie van hook_install.
+ */
+function cevoracontent_install() {
+  $t = get_t();
+  //Maak page content type aan
+  $page_node = array(
+      'type' => 'page',
+      'name' => $t('Cevora Pagina'),
+      'description' => $t('Een pagina voor de Cevora website'),
+      'base' => 'node_content',
+      'title_label' => $t('Titel'),
+      'custom' => TRUE,
+      'promote' => 0, //promoted to front page afzetten
+      'comment' => 0, //commentaart disablen
+  );
+  $content_type = node_type_set_defaults($page_node);
+  
+  //voeg body toe en bewaar
+  node_add_body_field($content_type, $t('Inhoud'));
+  node_type_save($content_type);
+  
+  //verberg label voor default display
+  $body_field_instance = field_info_instance('node', 'body', 'page');
+  $body_field_instance['display']['default']['label'] = 'hidden';
+  field_update_instance($body_field_instance);
+ 
+  //node options:
+  //promoted to front page => false
+  //display author => false
+  //alleen main-menu is beschikbaar als menu
+  //en dit is dan ook de default
+  variable_set('node_options_page', array('status'));
+  variable_set('node_submitted_page', 0);
+  variable_set('menu_options_page', array('main-menu'));
+  variable_set('menu_parent_page', 'main-menu:0');
+  
+  $items = _cevoracontent_pagearray();
+  foreach($items as $item){
+    _cevoracontent_verwerkarray($item, 0);
+  }
+}
+
+/**
+ * Geef een lijst van pages met hun menu links terug
+ * @return  array() lijst van pages
+ */
+function _cevoracontent_pagearray(){
+  $home = array(
+    'titel' => 'Cevora staat voor opleidingen en meer',
+    'body' => 'kosteloze opleidingen en diensten die door de bedrijven van het ANPCB (PC218) al voorgefinancierd zijn',
+    'is_home' => TRUE,
+    'weight' => 0,
+    'menu_titel' => 'Home',
+  );
+  $opleidingen = array(
+    'titel' => 'Opleidingsaanbod',
+    'body' => 'Bedrijven uit het PC218 kunnen uit honderden korte en efficiënte Cevora-opleidingen kiezen om hun bedienden op te leiden.',
+    'menu_titel' => 'Opleidingen',
+    'weight' => 1,
+    'children' => array(
+        0 => array(
+          'titel' => 'Aanvullende acties',
+          'body' => 'Een paar opleidingsacties in de kijker: ',
+          'menu_titel' => 'Aanvullende acties',
+          'weight' => 0,
+          'children' => array(
+              0 => array(
+                'titel' => 'Opleidingsadvies 50+',
+                'body' => '50-plussers zijn omwille van hun ervaring en kennis troeven van hun onderneming. In tijden van een krappe arbeidsmarkt is het dan ook uiterst belangrijk om deze ervaren krachten aan boord te houden. Want we kunnen er niet omheen : we moeten met z’n allen langer aan de slag blijven.',
+                'menu_titel' => 'Opleidingsadvies voor 50+',
+                'weight' => 0,  
+              ),
+              1 => array(
+                'titel' => 'Innovatie kan u leren',
+                'body' => 'U kan haast niet aan het belang van innovatie ontsnappen. Uit onderzoek blijkt immers dat innovatieve bedrijven gemiddeld succesvoller zijn dan niet-innovatieve en dat kleine en middelgrote bedrijven even goed en sterk kunnen innoveren als grote. ',
+                'menu_titel' => 'Innovatie binnen uw bedrijf stimuleren',
+                'weight' => 1,
+              ),
+              2 => array(
+                'titel' => 'Opleidingen voor opleidingsverantwoordelijken, begeleiders, trainers, enz...',
+                'body' => 'Levenslang leren, opleidingsplannen, competentiebeheer,... Begrippen en ideeën die meer en meer ingang vinden in het HR-beleid en die voor u als onderneming een ware uitdaging vormen ! ',
+                'menu_titel' => 'Ondersteuning van uw opleidingsbeleid',
+                'weight' => 2,
+              ),
+           ),
+        ),
+        1 => array(
+          'titel' => 'Inschrijvingsvoorwaarden',
+          'body' => 'Wie kan kosteloos deelnemen aan de Cevora-opleidingen? ',
+          'menu_titel' => 'Inschrijvingsvoorwaarden',
+          'weight' => 1,
+        ),
+        2 => array(
+          'titel' => 'Ontdek ons opleidingsaanbod',
+          'body' => 'Ontdek ons volledig opleidingsaanbod via het algemeen overzicht werknemersopleidingen  augustus 2012 - november 2012 (PDF). ',
+          'menu_titel' => 'Onze brochures',
+          'weight' => 2,
+        ),
+        3 => array(
+          'titel' => 'E-learning',
+          'body' => 'Of het nu gaat om het weer opfrissen van kennis, het verankeren van kennis of het ontwikkelen van nieuwe competenties, e-learning laat het bedrijf toe om te beantwoorden aan de opleidingsbehoeften van zijn werknemers.',
+          'menu_titel' => 'Opleidingsaanbod',
+          'weight' => 3,
+          'children' => array(
+              0 => array(
+                  'titel' => 'Opleidingsaanbod buiten de uren',
+                  'body' => 'U bent bediende uit een ANPCB-onderneming? ',
+                  'menu_titel' => 'De aanvullende opleidingsdag',
+                  'weight' => 0,
+              ),
+           ),
+        ),
+    ),
+  );
+  $financieel  = array(
+    'titel' => 'Geniet van een financiële premie en verminder uw opleidingsfactuur',
+    'body' => 'Indien uw bedrijf een opleidingsplan geregistreerd heeft in het kader van de sectorale CAO van 19 september 2011 kan u van de volgende financiële voordelen genieten',
+    'menu_titel' => 'Financiële steun',
+    'weight' => 2,
+    'children' => array(
+        0 => array(
+          'titel' => 'Opleidingspremies',
+          'body' => 'U bent werkgever?',
+          'menu_titel' => 'Opleidingspremies',
+          'weight' => 0,
+          'children' => array(
+             0 => array(
+               'titel' => 'Opleidingspremies voor bedrijven',
+               'body' => 'U vormt uw bedienden door beroep te doen op betalende opleidingen?',
+               'menu_titel' => 'Opleidingspremies voor bedrijven',
+               'weight' => 0,
+             ),
+             1 => array(
+               'titel' => 'Opleidingspremies voor bedienden',
+               'body' => 'U bent bediende in een ANPCB-bedrijf en u volgt, op eigen kosten, een beroepsopleiding buiten de werkuren?',
+               'menu_titel' => 'Opleidingspremies voor bedrijven',
+               'weight' => 1,
+             ),
+          ),
+          1 => array(
+            'titel' => 'Kortingen bij opleidingscentra',
+            'body' => 'U wenst opleidingen te organiseren voor uw bedienden en hebt een opleidingsplan laten registreren in het kader van de sectoriële CAO van 19 september 2011 ? ',
+            'menu_titel' => 'Kortingen bij opleidingscentra (Formstimul)',
+            'weight' => 1,
+          ),    
+        ),
+     ),
+  );
+  $aanwervingen = array(
+    'titel' => 'Stages en hulp bij recrutering',
+    'body' => 'Ondervindt u moeilijkheden om vacatures ingevuld te krijgen? ',
+    'menu_titel' => 'Hulp bij aanwervingen',
+    'weight' => 3,
+    'children' => array(
+      0 => array(
+        'titel' => 'Stage van 4 à 6 weken in het kader van onze beroepsopleidingen voor werkzoekenden',
+        'body' => 'Jobber by Cevora helpt bedrijven bij het invullen van hun knelpuntfuncties door aan werkzoekenden gerichte beroepsopleidingen aan te beiden die steeds gekoppeld zijn aan een eindstage.',
+        'menu_titel' => 'Geschoolde werkzoekenden',
+        'weight' => 0,
+      ),
+      1 => array(
+        'titel' => 'Jongeren vol potentieel',
+        'body' => 'De sociale partners van het ANPCB wensen extra opleidingsmogelijkheden voor jonge werkzoekenden (18-25 jaar) te creëren en dit met een methodiek speciaal gericht op jongeren.',
+        'menu_titel' => 'Jongeren vol potentieel',
+        'weight' => 1,
+      ),
+      2 => array(
+        'titel' => 'Taalstage van 4 à 6 weken voor een werkzoekende van over de taalgrens',
+        'body' => 'Naast de ‘voltooiingsstages’ (na een langdurige Cevora-opleiding) organiseert Cevora voor Nederlandstalige werkzoekende, in samenwerking met VDAB, Bruxelles Formation en FOREM, ook taalstages ‘tout court’. ',
+        'menu_titel' => 'Een taalstage aanbieden',
+        'weight' => 2,
+      ),
+    )
+  );
+  $outplacement = array(
+    'titel' => 'Outplacement',
+    'body' => 'U bent werkgever van het Paritair Comité 218 ',  
+    'menu_titel' => 'Outplacement',
+    'weight' => 4,
+    'children' => array(
+      0 => array(
+        'titel' => 'Outplacement',
+        'body' => 'Wat is outplacement?',
+        'menu_titel' => 'Werkgever PC218',
+        'weight' => 0,
+      ),
+      1 => array(
+        'titel' => 'Ontslagen bediende PC 218',
+        'body' => 'Ontslagen bediende PC 218',
+        'menu_titel' => 'Ontslagen bediende PC 218',
+        'weight' => 1,
+        'children' => array(
+          0 => array(
+            'titel' => 'Outplacement: 45-plussers',
+            'body' => 'Wat is outplacement',
+            'menu_titel' => '45-plussers',
+            'weight' => 0,
+          ),  
+          1 => array(
+            'titel' => 'Outplacement: minder dan 45 jaar oud',
+            'body' => 'Wat is “Klaar voor een nieuwe start”?',
+            'menu_titel' => 'Minder dan 45 jaar',
+            'weight' => 1,  
+          ),
+        ),
+      ),
+    )
+  );
+  $wie = array(
+    'titel' => 'Wie zijn wij?',
+    'body' => 'Ontdek hier in drie minuten welke diensten Cevora u te bieden heeft.',
+    'menu_titel' => 'Ons beter leren kennen',
+    'weight' => 5,
+    'children' => array(
+      0 => array(
+        'titel' => 'Organogram',
+        'body' => 'pdf tekst',
+        'menu_titel' => 'Organogram',
+        'weight' => 0,
+      ),
+      1 => array(
+        'titel' => 'Studiedienst en publicaties',
+        'body' => 'Cevora opereert in een context die wordt gekenmerkt door een veranderlijke arbeidsmarkt en veranderende opleidingsbehoeften in de bedrijven en staat ten dienste van een zeer uitgebreide sector, die ongeveer dertig verschillende subsectoren omvat. Sinds zijn ontstaan is Cevora dus uitgerust met een studiedienst die het strategisch en operationeel beslissingsproces ondersteunt. ',
+        'menu_titel' => 'Studiedienst en publicaties',
+        'weight' => 1,
+      ),
+      2 => array(
+        'titel' => 'Werken bij Cevora',
+        'body' => 'Waarom werken bij Cevora?',
+        'menu_titel' => 'Werken bij Cevora',
+        'weight' => 2,
+      ),
+      3 => array(
+        'titel' => 'Nuttige links',
+        'body' => 'Werknemersorganisaties',
+        'menu_titel' => 'Nuttige links',
+        'weight' => 3,
+      )
+    ),
+  );
+  return array($home, $opleidingen, $financieel, $aanwervingen, $outplacement, $wie);
+}
+
+/**
+ * Maakt de node in $item aan met de juiste menu link en 
+ * verwerkt ook de eventuele child menu-items
+ * @param array $item Een array met titel, body en menu_titel
+ * @param int $parent_item De id van het parent menu
+ */
+function _cevoracontent_verwerkarray($item, $parent_item) {
+  $titel = $item['titel'];
+  $body = $item['body'];
+  $menu_titel = $item['menu_titel'];
+  $menu_weight = $item['weight'];
+  $parent_menu = 'main-menu:' . $parent_item;
+  $node = _cevoracontent_nieuwenode($titel, $body, $menu_titel, $parent_menu, $menu_weight);
+  //indien nodig => zet deze node als frontpage
+  if (isset($item['is_home'])) {
+    variable_set('site_frontpage', 'node/' . $node->nid);
+  }
+  $menu_id = $node->menu['mlid'];
+  if (!empty($item['children'])) {
+    //menu's moeten gerebuild worden zodat de parent gekend is
+    //wanneer de children worden toegevoegd
+    menu_rebuild();
+    foreach($item['children'] as $child) {
+      _cevoracontent_verwerkarray($child, $menu_id);
+    }
+  }
+  
+}
+/**
+ * Maakt een nieuwe node aan
+ * @param string $titel De titel
+ * @param string $body De body tekst
+ * @param string $menu_titel De titel van het menu
+ * @param string $parent_menu Naam en nummer van het parent menu(bijvoorbeeld main-menu:0)
+ */
+function _cevoracontent_nieuwenode($titel, $body, $menu_titel, $parent_menu, $menu_weight) {
+  $t = get_t();
+  module_load_include('inc', 'node', 'node.pages');;
+  $node = new stdClass();
+  $node->type = 'page';
+  $node->language = LANGUAGE_NONE;
+  node_object_prepare($node);
+  
+  $form_state = array();
+  $form_state['values']['title'] = $titel;
+  $form_state['values']['body'][$node->language][0]['value'] = $body;
+  $form_state['values']['menu']['enabled'] = 1;
+  $form_state['values']['menu']['parent'] = $parent_menu;
+  $form_state['values']['menu']['link_title'] = $menu_titel;
+  $form_state['values']['menu']['weight'] = $menu_weight;
+  $form_state['values']['op'] = $t('Save');
+  drupal_form_submit("{$node->type}_node_form", $form_state, $node);
+  return $node;  
+}
+/**
+ * Implementatie van hook_uninstall()
+ */
+function cevoracontent_uninstall() {
+  //Haal een array van node id's op van het page content type
+  //en verwijder ze
+  $sql = 'select nid from {node} n where n.type= :type';
+  $result = db_query($sql, array(':type' => 'page'));
+  $nids = $result->fetchCol();
+  node_delete_multiple($nids);
+  
+  //Verwijder het body instance veld (en verwijder eventueel ook het veld zelf)
+  $body_instance = field_info_instance('node', 'body', 'page');
+  field_delete_instance($body_instance);
+  
+  //verwijder variables 
+  variable_del('node_options_page');
+  variable_del('node_submitted_page');
+  variable_del('node_preview_page');
+  variable_del('menu_parent_page');
+  variable_del('menu_options_page');
+  //zet frontpage terug op de default frontpage
+  variable_set('site_frontpage', 'node');
+  //Verwijder het node type
+  node_type_delete('page');
+  
+  field_purge_batch(500);
+}

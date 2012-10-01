@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Cevora content feature.
+ */
+
+include_once 'cevora_content.features.inc';
