@@ -66,6 +66,101 @@
     width: 100%;
 }
 
+#region-header-third .region-inner{
+	margin-right: 47px;
+}
+
+#region-header-third h2.block-title {
+	color: white;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: -1px;
+}
+#region-header-third .block-inner {
+	float: right;
+	
+	display: block;
+    width: 215px;
+    height: 91px;
+    background-color: #343434;
+}
+
+#region-header-third table {
+	border:none;
+}
+#zone-header #block-views-opleidingsaanbod-view-block {
+	height: 91px;
+	background: url('../images/banner-cefora-offre2.gif') no-repeat;
+}
+
+#block-views-opleidingsaanbod-view-block .views-field-title {
+    padding: 20px 0px 0px 360px;
+}
+
+#block-views-opleidingsaanbod-view-block .views-field-body a {
+	background: url('../images/bouton_grey.png') no-repeat;
+    position: absolute;
+    display: block;
+    width: 147px;
+    height: 25px;
+    color: #D17D00;
+    padding-top: 4px;
+    text-align: center;
+    cursor: pointer;
+    bottom: 6px;
+    right: 226px;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    font-weight: bold;
+    word-spacing: 0.4em;
+}
+
+#block-views-opleidingsaanbod-view-block .views-field-body a:hover {
+    background: url('../images/bouton_grey_hover.png') no-repeat;
+}
+
+#block-views-opleidingsaanbod-view-block a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+#block-views-random-image-block {
+	float:right;
+}
+ #zone-footer {
+    height: 100px;
+ }
+ 
+ #zone-footer-wrapper {
+    background-color: #EEEEEE;
+    width: 100%;
+ }
+ 
+ #zone-footer h2.block-title {
+    font-weight: bold;
+    letter-spacing: -1px;
+    font-size: 16px;
+ }
+ 
+ #zone-footer li {
+    list-style: none outside none;
+ }
+ #zone-footer a {
+    text-decoration: none;
+    color: #333333;
+    background-image: none;
+ }
+ #zone-footer a:hover {
+     color: #FF6600;
+ }
+#zone-footer .block-menu-block {
+	float:left;
+	margin: 5px 20px 5px 0px;
+}
 #region-sub-menu #block-menu-block-1 {
 	background: url('../images/slide_10.jpg') no-repeat;
 	height:328px;
@@ -97,31 +192,32 @@
     list-style: none outside none;
 }
 
-#block-menu-block-1 a, .menu-block-1 li a {
+ .menu-block-1 li a {
     color: #333333;
     text-decoration: none;
     letter-spacing: -1px;
     padding-right: 30px;
 }
 
-#block-menu-block-1 li a.active,#block-menu-block-1 li a.active-trail {
+.menu-block-1 li a.active,.menu-block-1 li a.active-trail {
     color: #FF6600;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: -1px;
     padding-right: 30px;
 
  }
  
- #page-title {
+ article h2.node-title a {
      color: #FF6600;
     display: block;
     font-size: 20px;
     font-weight: normal;
     line-height: 28px;
+    text-decoration: none;
  }
  
- ul li.collapsed {
+ ul li.collapsed > a {
     background: url('../images/arrow-right.png') no-repeat scroll right center transparent;
  }
 
@@ -131,7 +227,7 @@
     background: url('../images/arrow-down_hover.png') no-repeat right;
  }
  
- article ul li.active {
+ article ul ul  li.active {
     /*background-image: url('../images/arrow_submenu.png');
     background-repeat: no-repeat;
     padding-left: 20px;*/
@@ -139,7 +235,7 @@
     width: 250px;
  }
  
- article ul li.active a {
+ article ul ul li.active > a {
     display: block;
     width: 247px;
     height: 22px;
@@ -159,3 +255,35 @@ padding: 0px;
 background: none;
      
 }
+
+.views-field-field-slidetext
+{
+	position: absolute;
+z-index: 40;
+padding: 15px;
+margin: 200px 0px 0px 50px;
+width: 370px;
+height: 100px;
+overflow: auto;
+font-style: italic;
+line-height: 16px;
+position: absolute;
+opacity: 0.7;
+background: none repeat scroll 0% 0% white;
+}
+
+a.slideshowcontent {
+  text-decoration: none;
+  color:black;
+  opacity: 1.0;
+}
+.slideshowtitel {
+	text-transform: uppercase;
+
+	font-size: 18px;
+	margin-bottom: 15px;
+	font-style:normal;
+}
+
+
+
