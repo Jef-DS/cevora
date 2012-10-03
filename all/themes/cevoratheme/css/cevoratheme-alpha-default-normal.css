@@ -97,7 +97,7 @@
 }
 
 #block-views-opleidingsaanbod-view-block .views-field-title {
-    padding: 20px 0px 0px 360px;
+    padding: 20px 0px 0px 330px;
 }
 
 #block-views-opleidingsaanbod-view-block .views-field-body a {
@@ -202,7 +202,8 @@
 .menu-block-1 li a.active,.menu-block-1 li a.active-trail {
     color: #FF6600;
     text-decoration: none;
-    font-size: 12px;
+    /*font-size: 12px;*/
+    font-size: 100%;
     letter-spacing: -1px;
     padding-right: 30px;
 
@@ -285,5 +286,30 @@ a.slideshowcontent {
 	font-style:normal;
 }
 
+#block-views-e-zineblock-block {
+	width: 213px;
+	height: 90px;
+	border-width: 1px;
+	border-style: solid;
+	float:right;
+	margin-right: 47px;
+}
+#block-views-e-zineblock-block a {
+	background: url('../images/bouton_moyen.png') no-repeat;
+	display: block;
+    width: 95px;
+    height: 25px;
+    color: white;
+    padding-top: 3px;
+    text-align: center;
+    cursor: pointer;
+}
 
+#block-views-e-zineblock-block a:hover {
+    background: url('../images/bouton_moyen_hover.png') no-repeat;
+    
+}
 
+.views-field-field-inschrijfveld {
+	margin: 30px 0px 0px 50px;
+}

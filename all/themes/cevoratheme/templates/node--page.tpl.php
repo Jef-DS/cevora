@@ -1,12 +1,4 @@
 <article<?php print $attributes; ?>>
-<?php
-  $block = menu_block_block_view("1");
-  
-?>
-  
-  <div style="background-image:url('<?php print file_create_url($content['field_foto'][0]['#item']['uri'])?>');background-repeat:no-repeat">
-    <?php print render($block['content']);?>
-  </div>
   <?php print $user_picture; ?>
   <?php print render($title_prefix); ?>
   <header>

@@ -10,7 +10,3 @@
  * for your subtheme grows. Please read the README.txt in the /preprocess and /process subfolders
  * for more information on this topic.
  */
-
-function cevoratheme_menu_block_wrapper__1($variables){
-  print_r($variables);
-}
