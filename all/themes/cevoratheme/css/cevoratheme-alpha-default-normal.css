@@ -87,6 +87,9 @@
     height: 91px;
     background-color: #343434;
 }
+#region header-third tbody:hover {
+	background-color: #343434;
+}
 
 #region-header-third table {
 	border:none;
@@ -303,6 +306,7 @@ a.slideshowcontent {
     padding-top: 3px;
     text-align: center;
     cursor: pointer;
+    text-decoration: none;
 }
 
 #block-views-e-zineblock-block a:hover {
@@ -312,4 +316,24 @@ a.slideshowcontent {
 
 .views-field-field-inschrijfveld {
 	margin: 30px 0px 0px 50px;
+}
+
+#block-views-random-image-block {
+	margin-right: -20px;
+}
+
+.language-switcher-locale-url li {
+	display: inline;
+	list-style-image: none;
+	list-style-type: none;
+}
+
+.language-switcher-locale-url li a {
+	color: #FFFFFF;
+	padding-left: 10px;
+	text-decoration: none;
+}
+
+.language-switcher-locale-url li.active a, .language-switcher-locale-url li a:hover {
+	color: #FF6600;
 }
